@@ -30,6 +30,7 @@ find_package(ublox_ubx_interfaces REQUIRED)
 find_package(rtcm_msgs REQUIRED)
 
 find_package(PkgConfig REQUIRED)
+pkg_check_modules(libudev REQUIRED libudev)
 pkg_check_modules(libusb REQUIRED libusb-1.0)
 
 include_directories(include SYSTEM)
@@ -50,10 +51,8 @@ ament_target_dependencies(ublox_dgnss_components
   ublox_ubx_msgs
   ublox_ubx_interfaces
   rtcm_msgs
-)
-
-target_link_libraries(ublox_dgnss_components
-  usb-1.0
+  libusb
+  libudev
 )
 
 rclcpp_components_register_node(ublox_dgnss_components
